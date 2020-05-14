@@ -7,8 +7,6 @@ import 'package:greatplaces/widgets/add_place_screen/location_input.dart';
 import 'package:greatplaces/widgets/add_place_screen/image_input.dart';
 
 class AddPlaceScreen extends StatefulWidget {
-  static const routeName = '/add-place';
-
   @override
   _AddPlaceScreenState createState() => _AddPlaceScreenState();
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:animations/animations.dart';
@@ -15,7 +16,8 @@ class PlacesListScreen extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
-              Navigator.pushNamed(context, AddPlaceScreen.routeName);
+              Navigator.push(context,
+                  CupertinoPageRoute(builder: (ctx) => AddPlaceScreen()));
             },
           )
         ],
