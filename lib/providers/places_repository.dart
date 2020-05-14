@@ -47,6 +47,9 @@ class PlacesRepository with ChangeNotifier {
 
   Future<void> removePlace(String id) async {
     final index = _items.indexWhere((place) => place.id == id);
+    if (_items[index].image.existsSync()) {
+      _items[index].image.deleteSync();
+    }
     _items.removeAt(index);
     notifyListeners();
     await db.delete('user_places', id);
