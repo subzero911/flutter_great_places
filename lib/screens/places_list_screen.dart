@@ -5,6 +5,7 @@ import 'package:animations/animations.dart';
 import 'package:greatplaces/providers/places_repository.dart';
 import 'package:greatplaces/screens/add_place_screen.dart';
 import 'package:greatplaces/screens/place_detail_screen.dart';
+import 'package:greatplaces/widgets/places_list_screen/dismissible_place_item.dart';
 
 class PlacesListScreen extends StatelessWidget {
   @override
@@ -16,8 +17,7 @@ class PlacesListScreen extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
-              Navigator.push(context,
-                  CupertinoPageRoute(builder: (ctx) => AddPlaceScreen()));
+              Navigator.push(context, CupertinoPageRoute(builder: (ctx) => AddPlaceScreen()));
             },
           )
         ],
@@ -32,27 +32,7 @@ class PlacesListScreen extends StatelessWidget {
                     : ListView.builder(
                         itemCount: greatPlaces.items.length,
                         itemBuilder: (ctx, i) => OpenContainer(
-                          closedBuilder: (ctx, openContainer) => Dismissible(
-                            key: ValueKey(greatPlaces.items[i].id),
-                            background: Container(
-                              alignment: Alignment.centerRight,
-                              padding: const EdgeInsets.only(right: 16),
-                              color: Colors.red,
-                              child: Icon(Icons.delete),
-                            ),
-                            direction: DismissDirection.endToStart,
-                            onDismissed: (dir) {
-                              greatPlaces.removePlace(greatPlaces.items[i].id);
-                            },
-                            child: ListTile(
-                              leading: CircleAvatar(
-                                backgroundImage: FileImage(greatPlaces.items[i].image),
-                              ),
-                              title: Text(greatPlaces.items[i].title),
-                              subtitle: Text(greatPlaces.items[i].location.address),
-                              onTap: openContainer,
-                            ),
-                          ),
+                          closedBuilder: (ctx, openContainer) => DismissiblePlaceItem(i, openContainer),
                           openBuilder: (ctx, closeContainer) => PlaceDetailScreen(greatPlaces.items[i].id),
                         ),
                       ),
