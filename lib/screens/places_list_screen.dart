@@ -30,13 +30,26 @@ class PlacesListScreen extends StatelessWidget {
                     : ListView.builder(
                         itemCount: greatPlaces.items.length,
                         itemBuilder: (ctx, i) => OpenContainer(
-                          closedBuilder: (ctx, openContainer) => ListTile(
-                            leading: CircleAvatar(
-                              backgroundImage: FileImage(greatPlaces.items[i].image),
+                          closedBuilder: (ctx, openContainer) => Dismissible(
+                            key: ValueKey(greatPlaces.items[i].id),
+                            background: Container(
+                              alignment: Alignment.centerRight,
+                              padding: const EdgeInsets.only(right: 16),
+                              color: Colors.red,
+                              child: Icon(Icons.delete),
                             ),
-                            title: Text(greatPlaces.items[i].title),
-                            subtitle: Text(greatPlaces.items[i].location.address),
-                            onTap: openContainer,
+                            direction: DismissDirection.endToStart,
+                            onDismissed: (dir) {
+                              greatPlaces.removePlace(greatPlaces.items[i].id);
+                            },
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                backgroundImage: FileImage(greatPlaces.items[i].image),
+                              ),
+                              title: Text(greatPlaces.items[i].title),
+                              subtitle: Text(greatPlaces.items[i].location.address),
+                              onTap: openContainer,
+                            ),
                           ),
                           openBuilder: (ctx, closeContainer) => PlaceDetailScreen(greatPlaces.items[i].id),
                         ),

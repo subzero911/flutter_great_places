@@ -21,6 +21,11 @@ Future<void> insert(String table, Map<String, Object> data) async {
   db.insert(table, data, conflictAlgorithm: sql.ConflictAlgorithm.replace);
 }
 
+Future<int> delete(String table, String id) async {
+  final db = await _database();
+  return db.delete(table, where: 'id = ?', whereArgs: [id]);
+}
+
 Future<List<Map<String, dynamic>>> getData(String table) async {
   final db = await _database();
   return db.query(table);
