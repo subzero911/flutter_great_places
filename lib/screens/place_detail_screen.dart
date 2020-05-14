@@ -1,19 +1,15 @@
-import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:greatplaces/models/place.dart';
+import 'package:provider/provider.dart';
 import 'package:greatplaces/providers/places_repository.dart';
 import 'package:greatplaces/screens/map_screen.dart';
-import 'package:provider/provider.dart';
 
 class PlaceDetailScreen extends StatelessWidget {
-  static const routeName = '/place-detail';
+  final id;
+
+  PlaceDetailScreen(this.id);
 
   @override
   Widget build(BuildContext context) {
-    final id = ModalRoute.of(context).settings.arguments;
     final selectedPlace = Provider.of<PlacesRepository>(context, listen: false).findById(id);
 
     return Scaffold(
