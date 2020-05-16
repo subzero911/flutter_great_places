@@ -17,7 +17,7 @@ class PlacesListScreen extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
-              Navigator.push(context, CupertinoPageRoute(builder: (ctx) => AddPlaceScreen()));
+              Navigator.pushNamed(context, AddPlaceScreen.routeName);
             },
           )
         ],
